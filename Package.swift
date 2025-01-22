@@ -26,6 +26,10 @@ let package = Package(
             ]
         ),
         .target(
+            name: "openssl",
+            sources: ["x86_64/include"],
+        ),
+        .target(
             name: "LZ4",
             sources: ["lib"],
             cSettings: [
@@ -33,7 +37,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: "mbedTLS", 
+            name: "mbedTLS",
             sources: ["library"],
             cSettings: [
                 .define("MBEDTLS_MD4_C"),
@@ -46,6 +50,7 @@ let package = Package(
             dependencies: [
                 .target(name: "LZ4"),
                 .target(name: "mbedTLS")
+                .target(name: "openssl")
             ],
             sources: ["library"],
             cxxSettings: [
@@ -56,7 +61,7 @@ let package = Package(
                 .define("ASIO_STANDALONE"),
                 .define("ASIO_NO_DEPRECATED"),
                 .define("ASIO_HAS_STD_STRING_VIEW"),
-                .define("USE_MBEDTLS"),
+                .define("USE_OPENSSL"),
                 .define("HAVE_LZ4"),
                 .define("OPENVPN_FORCE_TUN_NULL"),
                 .define("USE_TUN_BUILDER")

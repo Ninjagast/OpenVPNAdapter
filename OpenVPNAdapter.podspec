@@ -60,7 +60,7 @@ Pod::Spec.new do |s|
     "CLANG_CXX_LIBRARY" => "libc++",
     "GCC_WARN_64_TO_32_BIT_CONVERSION" => "NO",
     "CLANG_WARN_DOCUMENTATION_COMMENTS" => "NO",
-    "HEADER_SEARCH_PATHS" => "\"${PODS_TARGET_SRCROOT}/#{asio_path}/asio/include/**\" \"${PODS_TARGET_SRCROOT}/#{mbedtls_path}/include/**\" \"${PODS_TARGET_SRCROOT}/#{openvpn_path}/**\" \"${PODS_TARGET_SRCROOT}/#{openssl_path}/x86_64/include\" "
+    "HEADER_SEARCH_PATHS" => "\"${PODS_TARGET_SRCROOT}/#{asio_path}/asio/include/**\" \"${PODS_TARGET_SRCROOT}/#{mbedtls_path}/include/**\" \"${PODS_TARGET_SRCROOT}/#{openvpn_path}/**\" \"${PODS_TARGET_SRCROOT}/#{openssl_path}/x86_64/include/**\" "
   }
 
 
@@ -91,11 +91,9 @@ Pod::Spec.new do |s|
     mbedtls.compiler_flags = "-DMBEDTLS_MD4_C", "-DMBEDTLS_RELAXED_X509_DATE", "-D_FILE_OFFSET_BITS=64"
   end
 
-#   s.subspec "openssl" do |openssl|
-#       openssl.source_files  = "#{openssl_path}/library/*.{c}"
-#       openssl.preserve_paths  = "#{openssl_path}/include/**/*.{h}"
-#
-#       openssl.compiler_flags = "-DMBEDTLS_MD4_C", "-DMBEDTLS_RELAXED_X509_DATE", "-D_FILE_OFFSET_BITS=64"
+  s.subspec "openssl" do |openssl|
+      openssl.preserve_paths  = "#{openssl_path}/x86_64/include/**/*.{h}"
+  end
 
   s.subspec "OpenVPN3" do |openvpn|
     openvpn.preserve_paths = "#{openvpn_path}/openvpn/**/*.hpp", "#{openvpn_path}/client/*.{hpp,cpp}"
